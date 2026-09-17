@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Array 내장함수 정리</title>
+</head>
+
+<body>
+    <div id="div1">
+
+    </div>
+    <script>
+        // toString() : 쉼표를 구분자로 해서 문자열로 변환
+        var fruits1 = ["Banana", "Orange", "Apple"];
+        console.log(fruits1.toString());
+
+        // join() : 특정 문자를 구분자로 해서 문자열로 변환
+        console.log(fruits1.join(" | "));
+
+        // join() 응용
+        var txt1 = "Banana";
+        txt1 += "Orange";
+        txt1 += "Apple";
+        console.log(txt1);
+        document.getElementById("div1").innerHTML = txt1;
+
+        var arr1 = [];
+        arr1.push("Banana");
+        arr1.push("Orange");
+        arr1.push("Apple");
+
+
+        console.log(arr1);
+        document.getElementById("div1").innerHTML = arr1.join("<br>");
+
+        // pop() : 배열의 가장 마지막 항목을 제거하여 반환 -> Stack 구현
+        var fruits2 = ["Banana", "Orange", "Apple"];
+        var str = fruits2.pop();
+        console.log(str);
+        console.log(fruits2);
+
+        // push() : 배열의 가장 마지막에 새로운 항목을 추가 -> Stack 구현
+        fruits2.push("Kiwi");
+        console.log(fruits2);
+
+        // shift() : 배열의 첫번째 항목을 제거하여 반환함 -> Queue 구현
+        var fruits3 = ["Banana", "Orange", "Apple"];
+        var str = fruits3.shift();
+        console.log(str);
+        console.log(fruits3);
+
+        // unshift() : 배열의 첫번째에 새로운 항목을 추가 -> Queue 구현
+        var fruits4 = ["Banana", "Orange", "Apple"];
+        fruits4.unshift("Lemon");
+        console.log(fruits4);
+
+        // ***** 중요 ***** -> Dequeue : pop(), push(), shift(), unshift()
+        fruits4[0] = "Grape";
+
+        fruits4.shift();
+        fruits4.unshift("Grape");
+        console.log(fruits4);
+
+        fruits4[fruits4.length - 1] = "Peach";
+        console.log(fruits4);
+
+        // splice() : 배열의 중간에 삽입 또는 삭제가 가능 
+        // a : start index | b : 삭제 할 항목의 수 | c : 삽입할 항목 
+        var fruits5 = ["Banana", "Orange", "Apple"];
+        // fruits5.splice(1, 2);
+        // fruits5.splice(1, 1);
+        // fruits5.splice(1, 0, "Kiwi");
+        // // fruits5.splice(1, 0, "Kiwi");
+        fruits5.splice(1, 0, "Lemon", "Kiwi");
+
+        console.log(fruits5);
+
+        // concat() : n개의 배열을 하나로 결합함.
+        // 병합 정렬 (Merge Sort)
+        var BTS1 = ["뷔"];
+        var BTS2 = ["정국", "RM", "슈가"];
+        var BTS = BTS1.concat(BTS2);
+        console.log(BTS);
+
+        // slice(a,b) : a index부터 b-1 index까지의 배열을 반환
+        var fruits6 = ["Banana", "Orange", "Apple"];
+        var fruits7 = fruits6.slice(1, 2);
+        console.log(fruits7);
+
+        var fruits7 = fruits6.slice(1);
+        console.log(fruits7);
+
+        // ***** sort() : 정렬(오름차순, 내림차순)
+        var fruits8 = ["Banana", "Orange", "Apple", "Lemon", "Kiwi"];
+        console.log(fruits8.sort());
+
+        var points = [40, 100, 70, 21, 99];
+        var arr = points.sort((a, b) => {
+            return a - b;
+        })
+        console.log(arr);
+
+        var arr = points.sort((a, b) => {
+            return b - a;
+        })
+        console.log(arr.reverse());
+
+        // object 정렬 
+        var persons = [
+            { name: "유재석", point: 78 },
+            { name: "김종국", point: 92 },
+            { name: "양세찬", point: 76 },
+            { name: "하 하", point: 81 },
+        ];
+
+        persons.sort((a, b) => {
+            return (a.point > b.point) ? 1 : (a.point == b.point) ? 0 : -1;
+        });
+
+        persons.sort((a, b) => {
+            return a.point - b.point;
+        });
+
+        console.log(persons);
+
+        // ***** filter() : 조건에 맞는 배열만 반환
+        var persons = [
+            { name: "유재석", point: 78, city: "서울" },
+            { name: "김종국", point: 92, city: "대구" },
+            { name: "양세찬", point: 76, city: "서울" },
+            { name: "하 하", point: 81, city: "제주" },
+        ];
+        var arr = [];
+        for (let p of persons) {
+            if (p.city == "서울") {
+                arr.push(p);
+            }
+        }
+        console.log(arr);
+
+        var arr = persons.filter((person) => {
+            return person.city === "서울";
+        })
+        console.log(arr);
+
+        // **** reduce() : 누적합을 구하는 함수 
+        // accumulator = 누산기 | currentValue = 현재값 
+        var arr = [1, 2, 3, 4, 5];
+        var sum = 0;
+        for (let a of arr) {
+            sum += a;
+        }
+        console.log(sum);
+
+        var total = arr.reduce((sum, a) => {
+            return sum + a;
+        }, 0)
+        console.log(total);
+
+        // ***** map() : reduce(), filter()와 다른 형태로 새로운 배열을 생성
+        var userList = [
+            { firstName: "재석", lastName: "유", email: "yu@gmail.com" },
+            { firstName: "종국", lastName: "김", email: "kim@gmail.com" },
+            { firstName: "세찬", lastName: "양", email: "yang@gmail.com" },
+            { firstName: "석진", lastName: "지", email: "ji@gmail.com" },
+        ];
+
+        var userList2 = userList.map((user) => {
+            return { fullName: user.lastName + user.firstName, firstName: user.firstName, lastName: user.lastName, email: user.email }
+        })
+        console.log(userList2);
+
+
+    </script>
+</body>
+
+</html>

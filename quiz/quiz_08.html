@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>큐 - 미림왕국의 공주를 구하라</title>
+</head>
+
+<body>
+    <script>
+        function solution(n, k) {
+            let answer = []
+            for (let i = 0; i < n; i++) {
+                answer.push(i + 1);
+            }
+            // let answer = Array.from({length:n}, (v, i) => i+1);
+
+            let count = 0, num;
+            while (answer.length != 1) {
+                num = answer.shift();
+                count++;
+                if (count == k) {
+                    count = 0;
+                    continue;
+                }
+                answer.push(num);
+            }
+
+            // while (queue.length) {
+            //     for (let i = 1; i < k; i++) queue.push(quque.shift());
+            //     queue.shift();
+            //     if (queue.length === 1) answer = queue.shift();
+            // }
+
+            return answer[0];
+        }
+        console.log(solution(8, 3));
+    </script>
+</body>
+
+</html>

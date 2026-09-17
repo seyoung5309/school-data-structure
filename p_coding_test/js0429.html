@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function solution(numbers) {
+            let answer = "";
+            let first = "";
+            while (answer !== null) {
+                first = numbers[0];
+                switch (first) {
+                    case 'o': // one
+                        numbers = numbers.slice(4, numbers.length);
+                        answer += '1'
+                        break;
+                    case 't': // two, three, 
+                        if (numbers[1] == 'w') {
+                            numbers = numbers.slice(4, numbers.length);
+                            answer += '2'
+                        } else {
+                            numbers = numbers.slice(5, numbers.length);
+                            answer += '3'
+                        }
+                        break;
+                    case 'f': // four, five
+                        if (numbers[1] == 'o') {
+                            numbers = numbers.slice(4, numbers.length);
+                            answer += '4'
+                        } else {
+                            numbers = numbers.slice(4, numbers.length);
+                            answer += '5'
+                        }
+                        break;
+                    case 'e': // eight
+                        numbers = numbers.slice(5, numbers.length);
+                        answer += '8'
+                        break;
+                    case 'n': // nine
+                        numbers = numbers.slice(4, numbers.length);
+                        answer += '9'
+                        break;
+                    default: // six, seven
+                        if (numbers[1] == 'i') {
+                            numbers = numbers.slice(3, numbers.length);
+                            answer += '6'
+                        } else {
+                            numbers = numbers.slice(5, numbers.length);
+                            answer += '7'
+                        }
+                }
+            }
+            return answer;
+        }
+        let numbers = "onetwothreefourfivesixseveneightnine";
+        console.log(solution(numbers));
+    </script>
+</body>
+
+</html>

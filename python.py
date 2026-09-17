@@ -1,0 +1,10 @@
+text = 'python'
+print(len(text))
+print(text.upper())
+print(text.lower())
+print(text.strip())
+print(text.find('p'))
+print(text.replace('p', 'P'))
+print(text.split('t'))
+print(text.startswith('p'))
+print(text)

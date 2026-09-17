@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>스택 - 괄호 안에 있는 문자열 제거</title>
+</head>
+
+<body>
+    <script>
+        function solution(str) {
+            let answer = "";
+            let stack = [];
+            for (let s of str) {
+                if (s === ')') {
+                    while (true) {
+                        let tmp = stack.pop();
+                        if (tmp === '(') {
+                            break;
+                        }
+                    }
+                } else
+                    stack.push(s);
+            }
+            answer = stack.join('');
+            return answer;
+        }
+
+        let str = "(A(BC)D)EF(G(H)(IJ)K)LM(N)"
+        console.log(solution(str));
+    </script>
+</body>
+
+</html>

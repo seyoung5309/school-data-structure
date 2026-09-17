@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>회의실 배정</title>
+</head>
+
+<body>
+    <script>
+        function solution(arr) {
+            let arrSort = arr.sort((a, b) => {
+                if (a[1] - b[1] == 0) {
+                    return a[0] - b[0]
+                } else {
+                    return a[1] - b[1]
+                }
+            })
+            // console.log(arrSort);
+
+            let answer = [];
+            for (let a of arrSort) {
+                if (answer.length === 0) {
+                    answer.push(a);
+                } else {
+                    if (a[0] >= answer[answer.length - 1][1]) {
+                        answer.push(a);
+                    }
+                }
+            }
+            console.log(answer);
+            return answer.length;
+        }
+        let arr = [[1, 4], [2, 3], [3, 5], [4, 6], [5, 7]]; // 3개 (2, 3), (3, 5), (5, 7)
+        // let arr = [[3, 3], [1, 3], [2, 3]]; // 2개 (1, 3), (3, 3)
+        console.log(solution(arr));
+    </script>
+</body>
+
+</html>

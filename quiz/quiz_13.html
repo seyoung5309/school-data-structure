@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>트리의 순회 - 전위, 중위, 후위</title>
+</head>
+
+<body>
+    <script>
+        function solution(v) {
+            let answer = "";
+            let arr = [];
+
+            for (let i = 0; i <= 7; i++) {
+                arr.push(i);
+            }
+
+            function Traversal(arr, i) {
+                // preOrder
+                // if (arr[i]) {
+                //     answer += arr[i] + " ";
+                //     Traversal(arr, i * 2);
+                //     Traversal(arr, i * 2 + 1);
+                // }
+
+                // inOrder 
+                if (arr[i]) {
+                    Traversal(arr, i * 2);
+                    answer += arr[i] + " ";
+                    Traversal(arr, i * 2 + 1);
+                }
+
+                // // postOrder
+                // if (arr[i]) {
+                //     Traversal(arr, i * 2);
+                //     Traversal(arr, i * 2 + 1);
+                //     answer += arr[i] + " ";
+                // }
+
+            }
+
+            function Traversal1(v) {
+                if (v > 7) return;
+
+                // preorder 
+                console.log(v);
+                Traversal1(v * 2);
+                Traversal1(v * 2 + 1);
+            }
+
+            Traversal(arr, v)
+            return answer;
+        }
+        console.log(solution(1));
+    </script>
+</body>
+
+</html>

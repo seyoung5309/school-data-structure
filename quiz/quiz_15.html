@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function solution(c, arr) {
+            let answer = 0;
+            //arr.unshift(0);
+            let check = Array.from({ length: arr.length + 1 }, () => 0);
+
+            // function DFS(v) {
+            //     if (v == arr.length + 1) {
+            //         let tmp = 0;
+            //         for (let i = 0; i < arr.length; i++) {
+            //             if (check[i] == 1) {
+            //                 tmp += arr[i];
+            //             }
+            //         }
+            //         if (tmp > answer && tmp <= c) {
+            //             answer = tmp;
+            //         }
+            //     } else {
+            //         check[v] = 1;
+            //         DFS(v + 1);
+            //         check[v] = 0;
+            //         DFS(v + 1);
+            //     }
+            // }
+
+            let sum = 0;
+            function DFS(v) {
+                if (v == arr.length + 1) {
+                    if (sum > answer && sum <= c) {
+                        answer = sum;
+                    }
+                    sum = 0;
+                } else {
+                    sum += arr[v];
+                    DFS(v + 1);
+                }
+            }
+
+            DFS(0)
+
+            return answer;
+        }
+        let arr = [81, 58, 42, 33, 61];
+        console.log(solution(259, arr));
+    </script>
+</body>
+
+</html>

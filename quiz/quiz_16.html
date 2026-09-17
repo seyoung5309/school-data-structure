@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>정보올림피아드</title>
+</head>
+
+<body>
+    <script>
+        function solution(time, arr) {
+            let answer = Number.MIN_SAFE_INTEGER;
+
+            function DFS(level, s, t) {
+                if (t > time) {
+                    return;
+                }
+                if (level == arr.length - 1) {
+                    if (s > answer) {
+                        answer = s;
+                    }
+                    // answer = Math.max(answer, s);
+                } else {
+                    DFS(level + 1, s + arr[level][0], t + arr[level][1]);
+                    DFS(level + 1, s, t);
+                }
+            }
+
+            DFS(0, 0, 0);
+
+            return answer;
+        }
+
+        let arr = [[10, 5], [25, 12], [15, 8], [6, 3], [7, 4]];
+        console.log(solution(20, arr));
+    </script>
+</body>
+
+</html>

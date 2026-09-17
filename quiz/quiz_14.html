@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function solution(n) {
+            let answer = [];
+            // let check = [0, 0, 0, 0];
+            let check = Array.from({ length: 4 }, () => 0);
+
+            function DFS(v) {
+                if (v == n + 1) {
+                    let tmp = "";
+                    for (let i = 1; i <= n; i++) {
+                        if (check[i] == 1) {
+                            tmp += i + " ";
+                        }
+                    }
+                    answer.push(tmp.trim());
+                } else {
+                    check[v] = 1;
+                    DFS(v + 1);
+                    check[v] = 0;
+                    DFS(v + 1);
+                }
+            }
+
+            // function DFS(i) {
+            //     if (i <= n) {
+            //         console.log(i);
+            //         console.log("" + i + DFS(i * 2));
+            //         console.log("" + i + DFS(i * 2) + DFS(i * 2 + 1));
+            //         console.log("" + i + DFS(i * 2 + 1));
+            //         return i;
+            //     } else {
+            //         return "";
+            //     }
+            // }
+
+            DFS(1);
+
+            return answer;
+        }
+        solution(3);
+        //console.log(solution(3));
+        // console.log(solution(4));
+    </script>
+</body>
+
+</html>
