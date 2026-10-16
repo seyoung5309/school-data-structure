@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>그래프 경로 탐색 - 인접 리스트</title>
+</head>
+
+<body>
+    <script>
+        function solution(n, arr) {
+            let answer = 0;
+
+            let arr2 = Array.from(Array(n), () => Array(0));
+
+            for (let [a, b] of arr) {
+                arr2[a - 1].push(b - 1);
+            }
+
+            console.log(arr2);
+
+            function result(start) {
+                if (start == n - 1) {
+                    answer++;
+                } else {
+                    for (let i = 0; i < arr2[start].length; i++) {
+                        if (check[arr2[start][i]] === 0) {
+                            check[arr2[start][i]] = 1;
+                            result(arr2[start][i]);
+                            check[arr2[start][i]] = 0;
+                        }
+                    }
+                }
+            }
+
+            let check = Array.from({ length: n }, () => 0);
+            check[0] = 1;
+
+            result(0);
+
+            return answer;
+        }
+        let arr = [
+            [1, 2], [1, 3], [1, 4], [2, 1], [2, 3], [2, 5], [3, 4], [4, 2], [4, 5]
+        ]
+        console.log(solution(5, arr));
+    </script>
+</body>
+
+</html>
