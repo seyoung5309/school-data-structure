@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>미로 탐색</title>
+</head>
+
+<body>
+    <script>
+        // 1은 벽, 0은 통로.
+        function solution(board) {
+            let answer = 0;
+            let check = Array.from(Array(7), () => Array(7));
+            let step = [[-1, 0], [0, 1], [1, 0], [0, -1]]
+
+            for (let i = 0; i < 7; i++) {
+                for (let j = 0; j < 7; j++) {
+                    check[i][j] = 0;
+                }
+            }
+
+            function dfs(x, y, str) {
+                if (x == 6 && y == 6) {
+                    answer++;
+                } else {
+                    for (let [sx, sy] of step) {
+                        if (x + sx >= 0 && x + sx < 7 && y + sy >= 0 && y + sy < 7) {
+                            if (check[x + sx][y + sy] == 0 && board[x + sx][y + sy] == 0) {
+                                check[x][y] = 1;
+                                dfs(x + sx, y + sy, str + `-> [${x + sx}, ${y + sy}]`);
+                                check[x][y] = 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            dfs(0, 0, "[0, 0]");
+            return answer;
+        }
+
+        let board = [
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 1, 1, 1, 1, 1, 0],
+            [0, 0, 0, 1, 0, 0, 0],
+            [1, 1, 0, 1, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1],
+            [1, 1, 0, 1, 1, 0, 0],
+            [1, 0, 0, 0, 0, 0, 0]
+        ]
+
+        console.log(solution(board));
+    </script>
+</body>
+
+</html>
