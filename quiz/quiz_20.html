@@ -7,13 +7,38 @@
 
 <body>
     <script>
-        function solution(start, str, end) {
-            if (start >= end) {
+        function solution() {
+            let answer = "1";
+            let queue = [1];
+            let n;
 
+            while (queue) {
+                console.log(n, queue);
+                n = queue.pop();
+
+                if (n > 3) { // 깊이
+                    break;
+                }
+
+                queue.unshift(2 * n);
+                answer += " " + (2 * n);
+                queue.unshift(2 * n + 1)
+                answer += " " + (2 * n + 1);
             }
+
+            /*
+                while(queue.length) {
+                    queue.push(1);
+                    for (let nv of [v*2, v*2+1]) {
+                        if(nv > 7) break;
+                        queue.push(nv)
+                    }
+                }
+            */
+
             return answer;
         }
-        console.log(solution(1, "1", 7));
+        console.log(solution());
     </script>
 </body>
 
