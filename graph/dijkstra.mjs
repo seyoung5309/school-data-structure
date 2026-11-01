@@ -5,11 +5,11 @@ class City {
   }
 
   addAdjacentCity(city, distnce) {
-    this.adjacent_vertices[city.value] = distnce;
+    this.adjacent_vertices[city.name] = distnce;
   }
 
   removeAdjacentCity(city) {
-    delete this.adjacent_vertices[city.value];
+    delete this.adjacent_vertices[city.name];
   }
 }
 
@@ -31,7 +31,7 @@ class Dijkstra {
       unvisited_cities[city_name] = this.all_cities[city_name];
     }
 
-    if (unvisited_cities[start_city] == null) {
+    if (unvisited_cities[start_city.name] == null) {
       console.log("출발 도시가 등록되어 있지 않습니다.");
       return null;
     } else {
@@ -39,7 +39,7 @@ class Dijkstra {
         shortest_path_table[city_name] = Infinity;
       }
     }
-    shortest_path_table[start_city] = 0;
+    shortest_path_table[start_city.name] = 0;
 
     // console.log(Object.keys(unvisited_cities));
 
@@ -59,19 +59,24 @@ class Dijkstra {
       delete unvisited_cities[closest_city_name];
 
       for (let adjacent_city_name in visited_cities[closest_city_name]
-        .adjacent_cities) {
+        .adjacent_vertices) {
         if (unvisited_cities[adjacent_city_name] == null) {
           continue;
         }
         let distnce =
           shortest_path_table[closest_city_name] +
-          visited_cities[closest_city_name].adjacent_cities[adjacent_city_name];
+          visited_cities[closest_city_name].adjacent_vertices[
+            adjacent_city_name
+          ];
 
         if (shortest_path_table[adjacent_city_name] > distnce) {
           shortest_path_table[adjacent_city_name] = distnce;
         }
       }
     }
+
+    console.log(shortest_path_table);
+    return shortest_path_table[end_city.name];
   }
 }
 
@@ -94,7 +99,7 @@ wonju.addAdjacentCity(deagu, 178);
 
 deajeon.addAdjacentCity(seoul, 140);
 deajeon.addAdjacentCity(gangneung, 118);
-deajeon.addAdjacentCity(deajeon, 56);
+deajeon.addAdjacentCity(jeonju, 56);
 deajeon.addAdjacentCity(deagu, 112);
 
 jeonju.addAdjacentCity(seoul, 187);
@@ -114,4 +119,4 @@ dijkstra.registerCity(deajeon);
 dijkstra.registerCity(jeonju);
 dijkstra.registerCity(deagu);
 
-dijkstra.shortestPath(seoul, deagu);
+console.log(dijkstra.shortestPath(seoul, deagu));
